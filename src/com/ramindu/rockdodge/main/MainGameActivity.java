@@ -19,6 +19,7 @@ import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.texture.region.TextureRegionFactory;
 import org.andengine.util.adt.color.Color;
 
+import android.util.Log;
 import android.view.Display;
 import android.widget.Toast;
 
@@ -73,10 +74,10 @@ public class MainGameActivity extends SimpleBaseAugmentedRealityGameActivity {
 		final float centerX = cameraWidth / 2;
 		final float centerY = cameraHeight / 2;
 
-		rock = new Sprite(centerX, centerY,
+		rock = new Sprite(200, 200,
 				mRockTextureRegion, this.getVertexBufferObjectManager());
-		rock.registerEntityModifier(new MoveModifier(30, 0, 0, cameraWidth,
-				cameraHeight));
+		/*rock.registerEntityModifier(new MoveModifier(30, 0, 0, cameraWidth,
+				cameraHeight));*/
 		rock.setScale(0.5f);
 		scene.registerUpdateHandler(new IUpdateHandler() {
 			
@@ -87,8 +88,9 @@ public class MainGameActivity extends SimpleBaseAugmentedRealityGameActivity {
 			}
 			
 			@Override
-			public void onUpdate(float arg0) {
-				// TODO Auto-generated method stub
+			public void onUpdate(float pSecondsElapsed) {
+				rock.setScale(1 * pSecondsElapsed);
+				Log.i("Seconds Elapsed",String.valueOf(pSecondsElapsed));
 				
 			}
 		});
