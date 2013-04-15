@@ -3,6 +3,7 @@ package com.ramindu.rockdodge.main;
 import java.io.IOException;
 
 import org.andengine.engine.camera.Camera;
+import org.andengine.engine.handler.IUpdateHandler;
 import org.andengine.engine.options.ConfigChooserOptions;
 import org.andengine.engine.options.EngineOptions;
 import org.andengine.engine.options.ScreenOrientation;
@@ -23,8 +24,6 @@ import android.widget.Toast;
 
 public class MainGameActivity extends SimpleBaseAugmentedRealityGameActivity {
 
-	private static final int CAMERA_WIDTH = 720;
-	private static final int CAMERA_HEIGHT = 480;
 	
 	private float cameraWidth;
 	private float cameraHeight;
@@ -32,6 +31,8 @@ public class MainGameActivity extends SimpleBaseAugmentedRealityGameActivity {
 	private ITexture mRockTexture;
 	private ITextureRegion mRockTextureRegion;
 
+	private Sprite rock;
+	
 	@SuppressWarnings("deprecation")
 	@Override
 	public EngineOptions onCreateEngineOptions() {
@@ -72,11 +73,25 @@ public class MainGameActivity extends SimpleBaseAugmentedRealityGameActivity {
 		final float centerX = cameraWidth / 2;
 		final float centerY = cameraHeight / 2;
 
-		final Sprite rock = new Sprite(centerX, centerY,
+		rock = new Sprite(centerX, centerY,
 				mRockTextureRegion, this.getVertexBufferObjectManager());
 		rock.registerEntityModifier(new MoveModifier(30, 0, 0, cameraWidth,
 				cameraHeight));
 		rock.setScale(0.5f);
+		scene.registerUpdateHandler(new IUpdateHandler() {
+			
+			@Override
+			public void reset() {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onUpdate(float arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		scene.attachChild(rock);
 
 		return scene;
